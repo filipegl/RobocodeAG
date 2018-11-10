@@ -18,8 +18,8 @@ public class Cromossomo implements Comparable<Cromossomo>{
 			
 	}
 
-	public void setGene(int[] gene) {
-		//Aqui seta o array dos valores.
+	public void setGene(int gene, int valor) {
+		this.genes[gene] = valor;
 		
 	}
 	
