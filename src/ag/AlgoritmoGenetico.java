@@ -142,9 +142,9 @@ public class AlgoritmoGenetico {
 		
 		if(decideMutacao(sorteio)) {
 			System.out.println("------ MUTOU ------");
-			System.out.println(filho.toString());
+			System.out.println("Atual        : " + filho.toString());
 			Cromossomo novo = realizaMutacao(filho);
-			System.out.println(novo.toString());
+			System.out.println("Após mutação : " + novo.toString());
 			return novo;
 		}
 		return filho;
@@ -178,7 +178,7 @@ public class AlgoritmoGenetico {
 		int gene = new Random().nextInt(6);
 		switch (gene) {
 		case 0:
-			int fire = c.getGene(0);
+			int fire = c.getGene(gene);
 			if (fire == 3)
 				c.setGene(gene, --fire); 
 			else
@@ -186,18 +186,20 @@ public class AlgoritmoGenetico {
 			break;
 			
 		case 4:
-			int ahead = c.getGene(4);
+			int ahead = c.getGene(gene);
 			if (ahead == 50000)
 				c.setGene(gene, --ahead); 
 			else
 				c.setGene(gene, ++ahead); 
+			break;
 			
 		case 5:
-			int walk = c.getGene(5);
+			int walk = c.getGene(gene);
 			if (walk == 50000)
 				c.setGene(gene, --walk); 
 			else
-				c.setGene(gene, ++walk); 
+				c.setGene(gene, ++walk);
+			break;
 			
 		default:
 			int grau = c.getGene(gene);
