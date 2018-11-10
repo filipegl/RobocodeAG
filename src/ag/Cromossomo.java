@@ -1,13 +1,13 @@
 package ag;
 
-public class Cromossomo {
+public class Cromossomo implements Comparable<Cromossomo>{
 	
-	private int index;
 	private int[] genes;
+	private int fitness;
 	
 	
-	public Cromossomo(int index, int fire, int firstGrau, int secondGrau, int thirdGrau, int ahead, int walk) {
-		this.index = index;
+	public Cromossomo(int fire, int firstGrau, int secondGrau, int thirdGrau, int ahead, int walk) {
+		this.fitness = 0;
 		this.genes = new int[6];
 		this.genes[0] = fire;
 		this.genes[1] = firstGrau;
@@ -23,13 +23,16 @@ public class Cromossomo {
 		
 	}
 	
-	public int[] getGene() {
-		//Aqui retorna o array dos valores.
-		return null;
+	public int getGene(int i) {
+		return this.genes[i];
 	}
 	
 	public int getFitness() {
-		return 0;	
+		return this.fitness;	
+	}
+	
+	public void setFitness(int fitness) {
+		this.fitness = fitness;
 	}
 	
 	public String toString() {
@@ -38,4 +41,10 @@ public class Cromossomo {
 		return result;
 		
 	}
+	
+	@Override
+	public int compareTo(Cromossomo cromossomo) {
+		return cromossomo.fitness - this.fitness;
+	}
+
 }
