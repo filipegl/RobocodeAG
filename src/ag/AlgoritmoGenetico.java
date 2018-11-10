@@ -4,8 +4,6 @@ package ag;
 public class AlgoritmoGenetico {
 	
 	public static void main(String[] args) {
-		String mostra = printString(geraPopulacao());
-		System.out.println(mostra);
 	}
 	
 	
