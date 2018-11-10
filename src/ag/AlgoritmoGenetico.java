@@ -12,6 +12,9 @@ public class AlgoritmoGenetico {
 	private static final int QNTD_ADAPTADOS = 226;
 
 	public static void main(String[] args) {
+		List<Cromossomo> pop = (ArrayList<Cromossomo>) geraPopulacao();
+		System.out.println(printString(novaPopulacao((ArrayList<Cromossomo>) pop)));
+
 	}
 
 	public static List<Cromossomo> geraPopulacao() {
@@ -49,10 +52,10 @@ public class AlgoritmoGenetico {
 		List<Cromossomo> maisAdaptados = new ArrayList<Cromossomo>();
 		List<Cromossomo> adaptados = new ArrayList<Cromossomo>();
 
-		for (int i = 0; i < antigaPopulacao.size(); i++) {
+		for (int i = 0; i < QNTD_ADAPTADOS; i++) {
 			if (i < QNTD_MAIS_ADAPTADOS)
 				maisAdaptados.add(antigaPopulacao.get(i));
-			else if (i < QNTD_ADAPTADOS)
+			else
 				adaptados.add(antigaPopulacao.get(i));
 		}
 
