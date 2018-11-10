@@ -12,10 +12,8 @@ public class AlgoritmoGenetico {
 	private static final int QNTD_ADAPTADOS = 226;
 
 	public static void main(String[] args) {
-		List<Cromossomo> pop = (ArrayList<Cromossomo>) geraPopulacao();
-		System.out.println(printString(novaPopulacao((ArrayList<Cromossomo>) pop)));
 
-	}
+}
 
 	public static List<Cromossomo> geraPopulacao() {
 		List<Cromossomo> populacao = new ArrayList<Cromossomo>();
