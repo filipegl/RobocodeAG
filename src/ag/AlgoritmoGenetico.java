@@ -16,15 +16,8 @@ public class AlgoritmoGenetico {
 
 	public static void main(String[] args) {
 		ArrayList<Cromossomo> pop = (ArrayList<Cromossomo>) geraPopulacao();
+		ArrayList<Cromossomo> npop = (ArrayList<Cromossomo>) novaPopulacao(pop);
 		//System.out.println(Arrays.toString(sorteio));
-		int j = 1;
-		for (int i = 0; i < 344; i++) {
-			boolean decisao = decideMutacao(sorteio);
-			if (decisao == true) {
-				System.out.println(j);
-				j++;
-			}
-		}
 		
 }
 
@@ -147,9 +140,13 @@ public class AlgoritmoGenetico {
 
 		Cromossomo filho = new Cromossomo(fireResult, firstGrauResult, secondGrauResult, thirdGrauResult, aheadResult, moveResult);
 		
-		if(decideMutacao(sorteio))
-			return realizaMutacao(filho);
-		
+		if(decideMutacao(sorteio)) {
+			System.out.println("------ MUTOU ------");
+			System.out.println(filho.toString());
+			Cromossomo novo = realizaMutacao(filho);
+			System.out.println(novo.toString());
+			return novo;
+		}
 		return filho;
 		
 	}
@@ -183,31 +180,31 @@ public class AlgoritmoGenetico {
 		case 0:
 			int fire = c.getGene(0);
 			if (fire == 3)
-				c.setGene(gene, fire--); 
+				c.setGene(gene, --fire); 
 			else
-				c.setGene(gene, fire++); 
+				c.setGene(gene, ++fire); 
 			break;
 			
 		case 4:
 			int ahead = c.getGene(4);
 			if (ahead == 50000)
-				c.setGene(gene, ahead--); 
+				c.setGene(gene, --ahead); 
 			else
-				c.setGene(gene, ahead++); 
+				c.setGene(gene, ++ahead); 
 			
 		case 5:
 			int walk = c.getGene(5);
 			if (walk == 50000)
-				c.setGene(gene, walk--); 
+				c.setGene(gene, --walk); 
 			else
-				c.setGene(gene, walk++); 
+				c.setGene(gene, ++walk); 
 			
 		default:
 			int grau = c.getGene(gene);
 			if (grau == 360)
-				c.setGene(gene, grau--); 
+				c.setGene(gene, --grau); 
 			else
-				c.setGene(gene, grau++); 
+				c.setGene(gene, ++grau); 
 			break;
 		}
 		
