@@ -1,10 +1,14 @@
 package ag;
 
+import java.io.File;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 import java.util.Random;
+
+import file.Arquivo;
 
 public class AlgoritmoGenetico {
 	private static final int QNTD_GRAU = 3;
@@ -12,14 +16,15 @@ public class AlgoritmoGenetico {
 	private static final int QNTD_MOVE = 2;
 	private static final int QNTD_MAIS_ADAPTADOS = 50;
 	private static final int QNTD_ADAPTADOS = 226;
-	private static final boolean[] sorteio = geraArray();
+	private static final boolean[] SORTEIO = geraArray();
 
 	public static void main(String[] args) {
-		ArrayList<Cromossomo> pop = (ArrayList<Cromossomo>) geraPopulacao();
-		ArrayList<Cromossomo> npop = (ArrayList<Cromossomo>) novaPopulacao(pop);
+		//ArrayList<Cromossomo> pop = (ArrayList<Cromossomo>) geraPopulacao();
+		//ArrayList<Cromossomo> npop = (ArrayList<Cromossomo>) novaPopulacao(pop);
+		//System.out.println(printString(npop));
 		//System.out.println(Arrays.toString(sorteio));
 		
-}
+	}
 
 	/**
 	 * Método para obter a população inicial, GENESIS
@@ -58,10 +63,11 @@ public class AlgoritmoGenetico {
 
 	/**
 	 * Onde ocorre a seleção dos mais aptos e leva-os para o crossover
+	 * 
 	 * @param antigaPopulacao
 	 * 
 	 */
-	
+
 	public static List<Cromossomo> novaPopulacao(ArrayList<Cromossomo> antigaPopulacao) {
 		Collections.sort(antigaPopulacao);
 		List<Cromossomo> maisAdaptados = new ArrayList<Cromossomo>();
@@ -85,9 +91,10 @@ public class AlgoritmoGenetico {
 
 		return novaPopulacao;
 	}
-	
+
 	/**
 	 * preparação do crossover dos melhores com os medianos
+	 * 
 	 * @param maisAdaptados
 	 * @param adaptados
 	 * 
@@ -102,9 +109,10 @@ public class AlgoritmoGenetico {
 
 		return lista;
 	}
-	
+
 	/**
 	 * Preparação do crossover dos melhores entre si
+	 * 
 	 * @param maisAdaptados
 	 * 
 	 */
@@ -121,10 +129,11 @@ public class AlgoritmoGenetico {
 
 		return lista;
 	}
-	
+
 	/**
-	 * Onde o crossover ocorre, dois individuos tem seus cromossomos mesclados
-	 * e um novo cromossomo é retornado
+	 * Onde o crossover ocorre, dois individuos tem seus cromossomos mesclados e um
+	 * novo cromossomo é retornado
+	 * 
 	 * @param cromossomo1
 	 * @param cromossomo2
 	 * 
@@ -138,9 +147,10 @@ public class AlgoritmoGenetico {
 		int aheadResult = (int) Math.ceil((cromossomo2.getGene(4) * 0.95) + (cromossomo1.getGene(4) * 0.05));
 		int moveResult = (int) Math.ceil((cromossomo2.getGene(5) * 0.95) + (cromossomo1.getGene(5) * 0.05));
 
-		Cromossomo filho = new Cromossomo(fireResult, firstGrauResult, secondGrauResult, thirdGrauResult, aheadResult, moveResult);
-		
-		if(decideMutacao(sorteio)) {
+		Cromossomo filho = new Cromossomo(fireResult, firstGrauResult, secondGrauResult, thirdGrauResult, aheadResult,
+				moveResult);
+
+		if (decideMutacao(SORTEIO)) {
 			System.out.println("------ MUTOU ------");
 			System.out.println("Atual        : " + filho.toString());
 			Cromossomo novo = realizaMutacao(filho);
@@ -148,7 +158,7 @@ public class AlgoritmoGenetico {
 			return novo;
 		}
 		return filho;
-		
+
 	}
 
 	public static String printString(List<Cromossomo> list) {
@@ -158,58 +168,58 @@ public class AlgoritmoGenetico {
 		}
 		return result;
 	}
-	
+
 	private static boolean[] geraArray() {
 		boolean array[] = new boolean[200];
 		for (int i = 0; i < array.length; i++) {
 			array[i] = false;
 		}
-		
+
 		array[102] = true;
 		return array;
 	}
-	
+
 	public static boolean decideMutacao(boolean[] array) {
 		int r = new Random().nextInt(200);
 		return array[r];
 	}
-	
+
 	public static Cromossomo realizaMutacao(Cromossomo c) {
 		int gene = new Random().nextInt(6);
 		switch (gene) {
 		case 0:
 			int fire = c.getGene(gene);
 			if (fire == 3)
-				c.setGene(gene, --fire); 
+				c.setGene(gene, --fire);
 			else
-				c.setGene(gene, ++fire); 
+				c.setGene(gene, ++fire);
 			break;
-			
+
 		case 4:
 			int ahead = c.getGene(gene);
 			if (ahead == 50000)
-				c.setGene(gene, --ahead); 
+				c.setGene(gene, --ahead);
 			else
-				c.setGene(gene, ++ahead); 
+				c.setGene(gene, ++ahead);
 			break;
-			
+
 		case 5:
 			int walk = c.getGene(gene);
 			if (walk == 50000)
-				c.setGene(gene, --walk); 
+				c.setGene(gene, --walk);
 			else
 				c.setGene(gene, ++walk);
 			break;
-			
+
 		default:
 			int grau = c.getGene(gene);
 			if (grau == 360)
-				c.setGene(gene, --grau); 
+				c.setGene(gene, --grau);
 			else
-				c.setGene(gene, ++grau); 
+				c.setGene(gene, ++grau);
 			break;
 		}
-		
+
 		return c;
 	}
 }
