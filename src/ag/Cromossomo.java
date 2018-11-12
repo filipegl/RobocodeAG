@@ -4,9 +4,10 @@ public class Cromossomo implements Comparable<Cromossomo>{
 	
 	private int[] genes;
 	private int fitness;
-	
+	private int id;
 	
 	public Cromossomo(int fire, int firstGrau, int secondGrau, int thirdGrau, int ahead, int walk) {
+		this.id = -1;
 		this.fitness = 0;
 		this.genes = new int[6];
 		this.genes[0] = fire;
@@ -33,6 +34,10 @@ public class Cromossomo implements Comparable<Cromossomo>{
 	
 	public void setFitness(int fitness) {
 		this.fitness = fitness;
+	}
+	
+	public void setId(int id) {
+		this.id = id;
 	}
 	
 	public String toString() {

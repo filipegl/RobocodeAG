@@ -18,13 +18,13 @@ public class AlgoritmoGenetico {
 	private static final int QNTD_ADAPTADOS = 226;
 	private static final boolean[] SORTEIO = geraArray();
 
-	public static void main(String[] args) {
+	//public static void main(String[] args) {
 		//ArrayList<Cromossomo> pop = (ArrayList<Cromossomo>) geraPopulacao();
 		//ArrayList<Cromossomo> npop = (ArrayList<Cromossomo>) novaPopulacao(pop);
 		//System.out.println(printString(npop));
 		//System.out.println(Arrays.toString(sorteio));
 		
-	}
+	//}
 
 	/**
 	 * Método para obter a população inicial, GENESIS
@@ -33,6 +33,7 @@ public class AlgoritmoGenetico {
 	public static List<Cromossomo> geraPopulacao() {
 		List<Cromossomo> populacao = new ArrayList<Cromossomo>();
 		int r = new Random().nextInt(3);
+		int index = 0;
 		for (int a = 1; a <= QNTD_FIRE; a++) {
 			int firstGrau = 0;
 			for (int b = 0; b < QNTD_GRAU; b++) {
@@ -46,6 +47,7 @@ public class AlgoritmoGenetico {
 							for (int f = 0; f < QNTD_MOVE; f++) {
 								Cromossomo cromossomo = new Cromossomo(a, firstGrau, secondGrau, thirdGrau, ahead,
 										walk);
+								cromossomo.setId(++index);
 								populacao.add(cromossomo);
 								walk = 50000;
 							}
@@ -89,6 +91,10 @@ public class AlgoritmoGenetico {
 		novaPopulacao.addAll(maisAdaptadosCrossover);
 		novaPopulacao.addAll(adaptadosCrossover);
 
+		for (int e = 0; e < novaPopulacao.size(); e++) {
+			novaPopulacao.get(e).setId(++e);
+		}
+		
 		return novaPopulacao;
 	}
 
