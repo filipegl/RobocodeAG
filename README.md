@@ -12,7 +12,7 @@
 
 #### Grupo:
 * [Filipe Gomes](https://github.com/filipegl)
-* [José Thiago](github.com/thiaguin)
-* [Lucas Anthony](github.com/lucasanthony)
+* [José Thiago](https://github.com/thiaguin)
+* [Lucas Anthony](https://github.com/lucasanthony)
 
 Universidade Federal de Campina Grande, 2018.
