@@ -11,7 +11,7 @@
 - [ ] Avaliação dos resultados
 
 #### Grupo:
-* [Filipe Gomes](github.com/filipegl)
+* [Filipe Gomes](https://github.com/filipegl)
 * [José Thiago](github.com/thiaguin)
 * [Lucas Anthony](github.com/lucasanthony)
 
