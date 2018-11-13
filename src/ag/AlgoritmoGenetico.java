@@ -35,11 +35,11 @@ public class AlgoritmoGenetico {
 		File arqTxt = arq.criaTxt();
 		int numGeracao = 0;
 		setIdPopulacao();
-		geraRobo(this.populacao);
+		geraRobo();
 		while (calculaMediaFit(this.populacao) < 80 && numGeracao < 2) {
 			
 			setIdPopulacao();
-			geraRobo(this.populacao);
+			geraRobo();
 			numGeracao++;
 			Collections.sort(this.populacao);
 			for (Cromossomo a: populacao) {
@@ -63,11 +63,13 @@ public class AlgoritmoGenetico {
 
 	}
 
-	private void geraRobo(ArrayList<Cromossomo> populacao) {
+	private void geraRobo() {
 		BatalhaController bc = new BatalhaController();
 
 		for (int i = 0; i < 3; i++) {
-			bc.battle(populacao.get(i));
+			bc.battle(this.populacao.get(i));
+			System.out.println(populacao.get(i).getFitness());
+			populacao.get(i).getFitness();
 		}
 
 	}
