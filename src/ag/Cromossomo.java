@@ -7,7 +7,6 @@ public class Cromossomo implements Comparable<Cromossomo>{
 	private int id;
 	
 	public Cromossomo(int fire, int firstGrau, int secondGrau, int thirdGrau, int ahead, int walk) {
-		this.id = -1;
 		this.fitness = 0;
 		this.genes = new int[6];
 		this.genes[0] = fire;
@@ -50,6 +49,10 @@ public class Cromossomo implements Comparable<Cromossomo>{
 	@Override
 	public int compareTo(Cromossomo cromossomo) {
 		return cromossomo.fitness - this.fitness;
+	}
+
+	public int getId() {
+		return this.id;
 	}
 
 }

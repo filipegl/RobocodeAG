@@ -2,6 +2,10 @@ package batalha;
 
 import java.io.File;
 
+import ag.CriadorDeCodigo;
+import ag.Cromossomo;
+import net.sf.robocode.ui.editor.RobocodeCompiler;
+import net.sf.robocode.ui.editor.RobocodeCompilerFactory;
 import robo.CrazyGenetic;
 import robocode.control.BattleSpecification;
 import robocode.control.BattlefieldSpecification;
@@ -19,8 +23,12 @@ public class BatalhaController {
 		engine = new RobocodeEngine(robocodeHome);
 	}
 
-	private void battle() {
-		RobotSpecification[] robos = engine.getLocalRepository("sample.Crazy, sample.Crazy");
+	public void battle(Cromossomo robo) {
+
+		CriadorDeCodigo cdc = new CriadorDeCodigo(robo);
+		cdc.compile();
+		
+		RobotSpecification[] robos = engine.getLocalRepository("sample.CrazyGenetics_" + robo.getId() +", sample.Crazy");
 		BattlefieldSpecification campoDeBatalha = new BattlefieldSpecification();
 		BattleObserver observer = new BattleObserver();
 
@@ -29,13 +37,9 @@ public class BatalhaController {
 		engine.addBattleListener(observer);
 		engine.runBattle(specs, true);
 
+		
 		engine.close();		
 		
 	}
 
-	public static void main(String[] args) {
-		BatalhaController bc = new BatalhaController();
-
-		bc.battle();
-	}
 }

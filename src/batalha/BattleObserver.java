@@ -1,6 +1,7 @@
 package batalha;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 import ag.AlgoritmoGenetico;
@@ -21,23 +22,32 @@ public class BattleObserver extends BattleAdaptor {
 			System.out.println("  " + result.getTeamLeaderName() + ": " + result.getScore());
 			resultado.add(new Resultado(result.getTeamLeaderName(), result.getScore()));
 		}
-		
 
-//		int fit = 0;
-//		String[] nome = resultado.get(0).getNome().split(" ");
-//		String[] nomeDoOutro = resultado.get(1).getNome().split(" ");
-//		int idRobo = -1;
-//		if (nome[0].equals("CrazyGenetic")) {
-//			fit = resultado.get(0).getScore() - resultado.get(1).getScore();
-//			idRobo = Integer.parseInt(nome[1]);
-//		} else {
-//			fit = resultado.get(1).getScore() - resultado.get(0).getScore();
-//			idRobo = Integer.parseInt(nomeDoOutro[1]);
-//		}
-//
-//		AlgoritmoGenetico ag = new AlgoritmoGenetico();
-//
-//		ag.setFitRobo(fit, idRobo);
+		int fit = 0;
+		String[] nome = resultado.get(0).getNome().split("_");
+		String[] nomeDoOutro = resultado.get(1).getNome().split("_");
+		int idRobo = 1000;
+		for (Resultado r : resultado) {
+			System.out.println(r.toString());
+		}
+		if (nome[0].equals("sample.CrazyGenetics")) {
+			fit = resultado.get(0).getScore() - resultado.get(1).getScore();
+			System.out.println("aaaaaa: " + Arrays.toString(nome));
+			System.out.println(nome[1]);
+			idRobo = Integer.parseInt(nome[1]);
+
+		} else {
+			fit = resultado.get(1).getScore() - resultado.get(0).getScore();
+			System.out.println("bbbbb: " + Arrays.toString(nome));
+			System.out.println(nomeDoOutro[1]);
+
+			idRobo = Integer.parseInt(nomeDoOutro[1]);
+		}
+
+		AlgoritmoGenetico ag = new AlgoritmoGenetico();
+
+		System.out.println(idRobo+100);
+		ag.setFitRobo(fit, idRobo);
 	}
 
 	public List<Resultado> getResultado(BattleCompletedEvent e) {

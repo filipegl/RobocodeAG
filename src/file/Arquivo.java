@@ -5,6 +5,8 @@ import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
 
+import ag.Cromossomo;
+
 public class Arquivo {
 
 	public File criaTxt() {
@@ -17,10 +19,11 @@ public class Arquivo {
 		return arquivo;
 	}
 	
-	public void escreveMedias(File arq, int media) throws IOException {
+	public void escreveMedias(File arq, int media, Cromossomo[] cromossomo) throws IOException {
 		FileWriter escreveArq = new FileWriter(arq, true);
 		BufferedWriter escreve = new BufferedWriter(escreveArq);
-		escreve.write(Integer.toString(media));
+		escreve.write(Integer.toString(media) + " - " + cromossomo[0].toString() + " - "
+				+ cromossomo[1].toString() + " - " + cromossomo[2].toString());
 		escreve.newLine();
 		
 		escreve.close();

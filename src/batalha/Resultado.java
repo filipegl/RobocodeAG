@@ -2,6 +2,7 @@ package batalha;
 
 public class Resultado {
 	
+
 	private String nome;
 	private int score;
 	
@@ -25,6 +26,11 @@ public class Resultado {
 
 	public void setScore(int score) {
 		this.score = score;
+	}
+
+	@Override
+	public String toString() {
+		return "Resultado [nome=" + nome + ", score=" + score + "]";
 	}
 
 }
