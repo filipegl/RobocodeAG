@@ -6,9 +6,9 @@
 
 #### Tarefas
 - [x] Criação do algoritmo
-- [ ] Aplicação ao Robocode
-- [ ] Recolhimento de dados das batalhas
-- [ ] Avaliação dos resultados
+- [x] Aplicação ao Robocode
+- [x] Recolhimento de dados das batalhas
+- [x] Avaliação dos resultados
 
 #### Grupo:
 * [Filipe Gomes](https://github.com/filipegl)
