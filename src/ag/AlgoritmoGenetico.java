@@ -18,17 +18,12 @@ public class AlgoritmoGenetico {
 	private static final int QNTD_MAIS_ADAPTADOS = 50;
 	private static final int QNTD_ADAPTADOS = 226;
 	private static final boolean[] SORTEIO = geraArray();
-	private ArrayList<Cromossomo> populacao;
+	private ArrayList<Cromossomo> populacao = (ArrayList<Cromossomo>) geraPopulacao();
 
 	/**
 	 * Método para obter a população inicial, GENESIS
 	 * 
 	 */
-
-	public AlgoritmoGenetico() {
-		super();
-		this.populacao = (ArrayList<Cromossomo>) geraPopulacao();
-	}
 
 	public void rodaAG() {
 		Arquivo arq = new Arquivo();
@@ -37,21 +32,19 @@ public class AlgoritmoGenetico {
 		setIdPopulacao();
 		geraRobo();
 		while (calculaMediaFit(this.populacao) < 80 && numGeracao < 2) {
-			
+			this.populacao = (ArrayList<Cromossomo>) novaPopulacao(this.populacao);
 			setIdPopulacao();
 			geraRobo();
+			System.out.println("a" + this.populacao.get(0).getFitness());
 			numGeracao++;
 			Collections.sort(this.populacao);
-			for (Cromossomo a: populacao) {
-			System.out.println(a.getFitness());
-			}
 			Cromossomo[] melhoresCromossomos = { this.populacao.get(0), this.populacao.get(1), this.populacao.get(2) };
 			try {
 				arq.escreveMedias(arqTxt, calculaMediaFit(this.populacao), melhoresCromossomos);
 			} catch (IOException e) {
 				e.printStackTrace();
 			}
-			this.populacao = (ArrayList<Cromossomo>) novaPopulacao(this.populacao);
+
 		}
 	}
 
@@ -278,14 +271,10 @@ public class AlgoritmoGenetico {
 	}
 
 	public void setFitRobo(int fit, int idRobo) {
-		
+
 		int i = idRobo - 1;
-		System.out.println("aaa");
-		System.out.println(fit);
 		this.populacao.get(i).setFitness(fit);
-		this.populacao.get(i).getFitness();
-		System.out.println(this.populacao.get(i).getFitness());
-		System.out.println("bbb");
+
 	}
 
 }
