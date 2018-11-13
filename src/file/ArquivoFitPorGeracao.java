@@ -7,10 +7,10 @@ import java.io.IOException;
 
 import ag.Cromossomo;
 
-public class Arquivo {
+public class ArquivoFitPorGeracao {
 
 	public File criaTxt() {
-		File arquivo = new File("MédiaFitnessPopulação.txt");
+		File arquivo = new File("FitPorRobo.txt");
 		try {
 			arquivo.createNewFile();
 		} catch (IOException e) {
@@ -19,11 +19,10 @@ public class Arquivo {
 		return arquivo;
 	}
 	
-	public void escreveMedias(File arq, int media, int numGeracao,Cromossomo[] cromossomo) throws IOException {
+	public void escreveFit(File arq, int media, int id) throws IOException {
 		FileWriter escreveArq = new FileWriter(arq, true);
 		BufferedWriter escreve = new BufferedWriter(escreveArq);
-		escreve.write(numGeracao + "° geração Media: " + Integer.toString(media) + " - " + cromossomo[0].toString() + " -       "
-				+ cromossomo[1].toString() + " -       " + cromossomo[2].toString() + "fim\n");
+		escreve.write(Integer.toString(id) + " - " +Integer.toString(media));
 		escreve.newLine();
 		
 		escreve.close();

@@ -1,6 +1,11 @@
 package ag;
 
+import java.io.BufferedReader;
 import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.FileReader;
+import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -22,29 +27,31 @@ public class AlgoritmoGenetico {
 
 	/**
 	 * Método para obter a população inicial, GENESIS
+	 * @throws IOException 
 	 * 
 	 */
 
-	public void rodaAG() {
+	public void rodaAG() throws IOException {
 		Arquivo arq = new Arquivo();
 		File arqTxt = arq.criaTxt();
 		int numGeracao = 0;
 		setIdPopulacao();
-		geraRobo();
-		while (calculaMediaFit(this.populacao) < 80 && numGeracao < 2) {
-			this.populacao = (ArrayList<Cromossomo>) novaPopulacao(this.populacao);
+		while (calculaMediaFit(this.populacao) < 100 && numGeracao < 1000) {
+			
 			setIdPopulacao();
 			geraRobo();
-			System.out.println("a" + this.populacao.get(0).getFitness());
+			setFitness();
+			limpaArquivo();
 			numGeracao++;
 			Collections.sort(this.populacao);
+			
 			Cromossomo[] melhoresCromossomos = { this.populacao.get(0), this.populacao.get(1), this.populacao.get(2) };
 			try {
-				arq.escreveMedias(arqTxt, calculaMediaFit(this.populacao), melhoresCromossomos);
+				arq.escreveMedias(arqTxt,numGeracao, calculaMediaFit(this.populacao), melhoresCromossomos);
 			} catch (IOException e) {
 				e.printStackTrace();
 			}
-
+			this.populacao = (ArrayList<Cromossomo>) novaPopulacao(this.populacao);
 		}
 	}
 
@@ -59,10 +66,8 @@ public class AlgoritmoGenetico {
 	private void geraRobo() {
 		BatalhaController bc = new BatalhaController();
 
-		for (int i = 0; i < 3; i++) {
+		for (int i = 0; i < this.populacao.size(); i++) {
 			bc.battle(this.populacao.get(i));
-			System.out.println(populacao.get(i).getFitness());
-			populacao.get(i).getFitness();
 		}
 
 	}
@@ -270,11 +275,25 @@ public class AlgoritmoGenetico {
 		return c;
 	}
 
-	public void setFitRobo(int fit, int idRobo) {
+	public void setFitness() throws IOException {
+		BufferedReader br = new BufferedReader(new		 
+				   FileReader("FitPorRobo.txt"));
+		String linha;
+		String[] result;
+		while ((linha = br.readLine()) != null) {
+		     result = linha.split(" - ");
+		     int id = Integer.parseInt(result[0]);
+		     int fit = Integer.parseInt(result[1]);
+		     this.populacao.get(--id).setFitness(fit);
+		}
 
-		int i = idRobo - 1;
-		this.populacao.get(i).setFitness(fit);
+		br.close();
 
+	}
+	
+	public void limpaArquivo( ) {
+		File file = new File("FitPorRobo.txt");
+		file.delete();
 	}
 
 }

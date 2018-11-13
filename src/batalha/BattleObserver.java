@@ -1,10 +1,13 @@
 package batalha;
 
+import java.io.File;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
 import ag.AlgoritmoGenetico;
+import file.ArquivoFitPorGeracao;
 import robocode.control.events.BattleAdaptor;
 import robocode.control.events.BattleCompletedEvent;
 import robocode.control.events.BattleErrorEvent;
@@ -32,8 +35,7 @@ public class BattleObserver extends BattleAdaptor {
 		}
 		if (nome[0].equals("sample.CrazyGenetics")) {
 			fit = resultado.get(0).getScore() - resultado.get(1).getScore();
-			System.out.println("aaaaaa: " + Arrays.toString(nome));
-			System.out.println(nome[1]);
+
 			idRobo = Integer.parseInt(nome[1]);
 
 		} else {
@@ -41,11 +43,15 @@ public class BattleObserver extends BattleAdaptor {
 			idRobo = Integer.parseInt(nomeDoOutro[1]);
 		}
 
-		AlgoritmoGenetico ag = new AlgoritmoGenetico();
-
-		ag.setFitRobo(fit, idRobo);
+		ArquivoFitPorGeracao arq = new ArquivoFitPorGeracao();
+		File arqTxt = arq.criaTxt();
+		try {
+			arq.escreveFit(arqTxt, fit, idRobo);
+		} catch (IOException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		}
 	}
-
 
 
 	public void onBattleMessage(BattleMessageEvent e) {
